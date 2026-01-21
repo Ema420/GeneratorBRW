@@ -120,24 +120,168 @@ const EXPANSIONS = {
       "Agonia"
     ],
     rooms: [
-      "Sala delle Fiamme Eterne",
-      "Abisso di Zaffiro"
+      "Stanza della Rosa Nera",
+      "Stanza degli Specchi",
+      "Stanza dell'Oracolo",
+      "L'Abisso",
+      "Biblioteca",
+      "Osservatorio",
+      "Santuario",
+      "Forgia",
+      "Giardino",
+      "Sala del Tesoro",
+      "Laboratorio Alchemico",
+      "Arena",
+      "Sala degli Evocatori",
+      "Armeria",
+      "Stanza dei Piaceri",
+      "Sala del Trono",
+      "Cimiterio",
+      "Cripta",
+      "Altare Sacrificale"
     ]
   },
 
-  divination: {
-    id: "divination",
-    name: "Divination",
+  apocalypse: {
+    id: "apocalypse",
+    name: "Apocalisse",
     wizards: [
-      "Veggente A",
-      "Veggente B"
+      "Mors",
+      "Fames",
+      "Pestilentia",
+      "Bellum"
     ],
     schools: [
-      "Divination"
+      "Guerra",
+      "Carestia",
+      "Morte",
+      "Pestilenza"
     ],
     rooms: [
-      "Sala degli Oracoli",
-      "Specchio del Fato"
+      "Stanza della Rosa Nera (Apocalisse)"
+    ]
+  },
+
+  dreadForge: {
+    id: "dreadForge",
+    name: "Dread Forge",
+    wizards: [
+      "Etna"
+    ],
+    schools: [
+      "Forgia"
+    ]
+  },
+
+  gaeaReborn: {
+    id: "gaeaReborn",
+    name: "Gaea Reborn",
+    wizards: [
+      "Talia"
+    ],
+    schools: [
+      "Geomanzia"
+    ],
+    rooms: [
+      "Rosa Smeraldo",
+      "Indoor Forest",
+      "Thorny Clearing",
+      "Life Fountain"
+    ]
+  },
+
+  sealOfFire: {
+    id: "sealOfFire",
+    name: "Seal Of Fire",
+    wizards: [
+      "Prospero"
+    ],
+    rooms: [
+      "Stanza della Rinascita"
+    ]
+  },
+
+   antiquities: {
+    id: "antiquities",
+    name: "Antiquities",
+    wizards: [
+      "Cassandra"
+    ],
+    schools: [
+      "Oracolo"
+    ],
+    rooms: [
+      "Arena Ludus"
+    ]
+  },
+
+  lastDinasty: {
+    id: "lastDinasty",
+    name: "Last Dinasty",
+    wizards: [
+      "Saba",
+      "Imhotep"
+    ],
+    schools: [
+      "Heka"
+    ],
+    rooms: [
+      "Santuario di Anubis"
+    ]
+  },
+
+  madness: {
+    id: "madness",
+    name: "Madness",
+    wizards: [
+      "Landolfo II"
+    ],
+    schools: [
+      "Caos"
+    ],
+    rooms: [
+      "Altare Sacrificale della Follia"
+    ]
+  },
+
+  northWinds: {
+    id: "northWinds",
+    name: "North Winds",
+    wizards: [
+      "Kormac"
+    ],
+    schools: [
+      "Druidica"
+    ],
+    rooms: [
+      "Abisso di Hel"
+    ]
+  },
+
+  onceUponATime: {
+    id: "onceUponATime",
+    name: "Once Upon A Time",
+    wizards: [
+      "Maelice",
+      "Hogwartz",
+      "Venticello",
+      "Bella"
+    ],
+    rooms: [
+      "Sala del Trono di Teschi"
+    ]
+  },
+
+  silkRoad: {
+    id: "silkRoad",
+    name: "Silk Road",
+    wizards: [
+      "Alisha",
+      "Dai Jin",
+      "Pyotr"
+    ],
+    rooms: [
+      "Giardino Zen"
     ]
   }
 };
