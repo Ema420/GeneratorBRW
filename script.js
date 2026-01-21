@@ -141,6 +141,48 @@ const EXPANSIONS = {
     name: "Silk Road",
     wizards: ["Alisha", "Dai Jin", "Pyotr"],
     rooms: [{ name: "Giardino Zen", color: "green" }]
+  },
+
+  duelLex: {
+    id: "lex",
+    name: "Duel Lex",
+    wizards: ["Ulrich",
+             "Bartholomaus"],
+    schools: ["Lex"],
+    rooms: [
+      { name: "Rosa Smeraldo", color: "black" },
+      { name: "Indoor Forest", color: "green" },
+      { name: "Thorny Clearing", color: "green" },
+      { name: "Life Fountain", color: "green" }
+    ]
+  },
+
+  duelVoid: {
+    id: "void",
+    name: "Duel Void",
+    wizards: ["Alice",
+             "Alhazred"],
+    schools: ["Void"],
+    rooms: [
+      { name: "Rosa Smeraldo", color: "black" },
+      { name: "Indoor Forest", color: "green" },
+      { name: "Thorny Clearing", color: "green" },
+      { name: "Life Fountain", color: "green" }
+    ]
+  },
+
+  duelKami: {
+    id: "kami",
+    name: "Duel Kami",
+    wizards: ["Abe No Seimei",
+             "En No Gyoja"],
+    schools: ["Shugendo"],
+    rooms: [
+      { name: "Rosa Smeraldo", color: "black" },
+      { name: "Indoor Forest", color: "green" },
+      { name: "Thorny Clearing", color: "green" },
+      { name: "Life Fountain", color: "green" }
+    ]
   }
 };
 
