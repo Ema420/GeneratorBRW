@@ -26,18 +26,38 @@
         </div>
 
         <div class="form-group">
-          <label>Espansioni abilitate:</label>
-          <label>
-            <input type="checkbox" id="useCrono" checked>
+          <label>Espansioni disponibili:</label>
+
+          <label class="expansion-label">
+            <input type="checkbox" class="expansion-checkbox" data-expansion-id="core" checked>
+            Core Box
+            <span class="expansion-hint">
+              (maghi base, scuole di magia base, stanze base)
+            </span>
+          </label>
+
+          <label class="expansion-label">
+            <input type="checkbox" class="expansion-checkbox" data-expansion-id="crono">
             Crono
+            <span class="expansion-hint">
+              (nuovi maghi, scuola Crono, stanze a tema tempo)
+            </span>
           </label>
-          <label>
-            <input type="checkbox" id="useInferno" checked>
+
+          <label class="expansion-label">
+            <input type="checkbox" class="expansion-checkbox" data-expansion-id="inferno">
             Inferno
+            <span class="expansion-hint">
+              (maghi infernali, scuola Inferno, stanze infernali)
+            </span>
           </label>
-          <label>
-            <input type="checkbox" id="useDivination">
+
+          <label class="expansion-label">
+            <input type="checkbox" class="expansion-checkbox" data-expansion-id="divination">
             Divination (esempio)
+            <span class="expansion-hint">
+              (maghi veggenti, scuola Divination, stanze profetiche)
+            </span>
           </label>
         </div>
 
@@ -45,7 +65,7 @@
           <label>Opzioni avanzate:</label>
           <label>
             <input type="checkbox" id="noDuplicates" checked>
-            Evita duplicati nelle scuole assegnate
+            Evita duplicati nelle scuole assegnate tra i giocatori
           </label>
         </div>
 
@@ -57,52 +77,8 @@
       <h3>Setup generato</h3>
 
       <div class="result-block">
-        <h4>Maghi</h4>
-        <ul id="wizards-list"></ul>
+        <h4>Espansioni usate</h4>
+        <p id="used-expansions"></p>
       </div>
 
-      <div class="result-block">
-        <h4>Scuole di magia per giocatore</h4>
-        <div id="schools-by-player"></div>
-      </div>
-
-      <div class="result-block">
-        <h4>Stanze della Loggia</h4>
-        <ul id="rooms-list"></ul>
-      </div>
-
-      <div class="result-block">
-        <h4>Modalità / Scenario</h4>
-        <p id="scenario"></p>
-      </div>
-
-      <button id="regenerate-btn">Rigenera</button>
-    </section>
-
-    <section class="help">
-      <h3>Come funziona</h3>
-      <p>
-        Questo generatore crea casualmente:
-      </p>
-      <ul>
-        <li>Un mago diverso per ogni giocatore</li>
-        <li>Un set di scuole di magia per ciascun mago</li>
-        <li>Un set di stanze casuali per la Loggia</li>
-        <li>Una modalità / scenario suggerito</li>
-      </ul>
-      <p>
-        Puoi modificare il contenuto delle liste (maghi, scuole, stanze, scenari)
-        nel file <code>script.js</code> per adattarlo alle tue espansioni.
-      </p>
-    </section>
-  </main>
-
-  <footer>
-    <p>
-      Fan-made tool per uso personale, non ufficiale né affiliato con Ludus Magnus Studio.
-    </p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+      <div class="result
