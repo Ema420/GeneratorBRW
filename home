@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Rose Wars Random Setup Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #5c0f1f;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #5c0f1f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #setup {
+            margin-top: 20px;
+            font-size: 18px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Black Rose Wars Random Setup Generator</h1>
+    <button onclick="generateSetup()">Generate Setup</button>
+    <div id="setup"></div>
+
+    <script>
+        const mages = ['Mage 1', 'Mage 2', 'Mage 3', 'Mage 4'];
+        const schools = ['Fire', 'Water', 'Earth', 'Air'];
+        const spells = ['Spell A', 'Spell B', 'Spell C', 'Spell D'];
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generateSetup() {
+            const mage = getRandomElement(mages);
+            const school = getRandomElement(schools);
+            const spell = getRandomElement(spells);
+
+            const setup = `Mage: ${mage} | School of Magic: ${school} | Starting Spell: ${spell}`;
+            document.getElementById('setup').textContent = setup;
+        }
+    </script>
+
+</body>
+</html>
