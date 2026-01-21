@@ -8,64 +8,116 @@ const EXPANSIONS = {
     name: "Core Box",
     wizards: [
       // Maghi base (sostituisci con elenco reale)
-      "Johan",
       "Nero",
       "Tessa",
       "Rebecca",
-      "Marco",
-      "Aaron",
-      "Loki",
-      "Gwen"
+      "Jafar"
     ],
     schools: [
       // Scuole di magia base
       "Distruzione",
-      "Conoscenza",
+      "Divinazione",
       "Illusione",
       "Necromanzia",
       "Trasmutazione",
-      "Conspiracy"
+      "Conspirazione"
     ],
     rooms: [
       // Stanze base (nome come sulle tessere)
-      "Biblioteca",
-      "Cimitero",
-      "Laboratorio Alchemico",
-      "Giardino delle Illusioni",
-      "Sala dei Portali",
-      "Camera delle Catene",
-      "Sala del Trono",
-      "Forgia Magica"
+      "Stanza della Rosa Nera (BRW)",
+      "Stanza degli Specchi (BRW)",
+      "Stanza dell'Oracolo (BRW)",
+      "L'Abisso (BRW)",
+      "Biblioteca (BRW)",
+      "Osservatorio (BRW)",
+      "Santuario (BRW)",
+      "Forgia (BRW)",
+      "Giardino (BRW)",
+      "Sala del Tesoro (BRW)",
+      "Laboratorio Alchemico (BRW)",
+      "Arena (BRW)",
+      "Sala degli Evocatori (BRW)",
+      "Armeria (BRW)",
+      "Stanza dei Piaceri (BRW)",
+      "Sala del Trono (BRW)",
+      "Cimiterio (BRW)",
+      "Cripta (BRW)",
+      "Altare Sacrificale (BRW)"
     ]
   },
 
-  crono: {
-    id: "crono",
-    name: "Crono",
+  sator: {
+    id: "sator",
+    name: "Sator Box",
     wizards: [
       // Esempio: rinomina con i maghi reali dell'espansione
-      "Cronomante A",
-      "Cronomante B"
+      "Old Jukas",
+      "Circe",
+      "Telmia",
+      "Corax",
+      "Tlahuicole",
+      "Vivian",
+      "Skultor",
+      "Bella (Sator)",
+      "Eliumbra",
+      "Howard",
+      "Bronte",
+      "D.Schiavon",
+      "Dukas",
+      "Arthur Vox",
+      "Arianna (Sator)",
+      "Baba Yaga",
+      "Tora"
     ],
     schools: [
       // Scuola specifica dell'espansione
-      "Crono"
+      "Vuoto",
+      "Sangue",
+      "Mente",
+      "Cronomanzia",
+      "Incantamento",
+      "Cartomanzia",
+      "Omnia",
+      "Bardica",
+      "Demonologia",
+      "Elementale",
+      "Trickery"
     ],
     rooms: [
-      "Sala del Tempo Spezzato",
-      "Osservatorio Temporale"
+      "Cursed Temple",
+      "Alehouse",
+      "Eerie Machinery",
+      "Cyclop's Forge",
+      "Assassin's Brotherhood",
+      "Garden of Ice and Fire",
+      "Cyclop's Room",
+      "Card's Room",
+      "Pigmen's Room",
+      "Horologium",
+      "Theater",
+      "Clinging Swamn",
+      "Tana dei Troll"
     ]
   },
 
-  inferno: {
-    id: "inferno",
-    name: "Inferno",
+  rebirth: {
+    id: "rebirth",
+    name: "BRW Rebirth",
     wizards: [
-      "Demone A",
-      "Demone B"
+      "Arianna (Rebirth)",
+      "Baron Doria",
+      "Gramigna",
+      "Angela",
+      "Sefu",
+      "Rikkart"
     ],
     schools: [
-      "Inferno"
+      "Tecnomanzia",
+      "Sciamanica",
+      "Alchimia",
+      "Malocchio",
+      "Incubo",
+      "Agonia"
     ],
     rooms: [
       "Sala delle Fiamme Eterne",
