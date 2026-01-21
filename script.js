@@ -319,6 +319,52 @@ function getRandomSubset(array, count) {
 }
 
 // ==========================
+// COSTRUZIONE DINAMICA UI ESPANSIONI
+// ==========================
+function buildExpansionsUI() {
+  const container = document.getElementById("expansions-container");
+  if (!container) return;
+  // Mantieni l'etichetta iniziale "Espansioni disponibili:"
+  // e poi aggiungi i checkbox generati
+  const labelElement = container.querySelector("label");
+  // Se non c'è nessun label di base, ne creiamo uno
+  if (!labelElement) {
+    const mainLabel = document.createElement("label");
+    mainLabel.textContent = "Espansioni disponibili:";
+    container.appendChild(mainLabel);
+  }
+  // Ordina le espansioni per nome, giusto per bellezza
+  const expansionsArray = Object.values(EXPANSIONS).sort((a, b) =>
+    a.name.localeCompare(b.name, "it", { sensitivity: "base" })
+  );
+  expansionsArray.forEach((exp, index) => {
+    const label = document.createElement("label");
+    label.className = "expansion-label";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "expansion-checkbox";
+    checkbox.setAttribute("data-expansion-id", exp.id);
+    // Scelta: la core box è di solito selezionata di default
+    if (exp.id === "core") {
+      checkbox.checked = true;
+    }
+    label.appendChild(checkbox);
+    // Nome espansione
+    const textNode = document.createTextNode(" " + exp.name);
+    label.appendChild(textNode);
+    // Hint opzionale
+    if (exp.hint) {
+      const hintSpan = document.createElement("span");
+      hintSpan.className = "expansion-hint";
+      hintSpan.textContent = exp.hint;
+      label.appendChild(hintSpan);
+    }
+    container.appendChild(label);
+  });
+}
+
+
+// ==========================
 // RECUPERO ESPANSIONI SCELTE
 // ==========================
 
