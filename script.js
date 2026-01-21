@@ -1,29 +1,13 @@
 // =====================================
 // DEFINIZIONE ESPANSIONI (PERSONALIZZA)
 // =====================================
-
 const EXPANSIONS = {
   core: {
     id: "core",
     name: "Core Box",
-    wizards: [
-      // Maghi base (sostituisci con elenco reale)
-      "Nero",
-      "Tessa",
-      "Rebecca",
-      "Jafar"
-    ],
-    schools: [
-      // Scuole di magia base
-      "Distruzione",
-      "Divinazione",
-      "Illusione",
-      "Necromanzia",
-      "Trasmutazione",
-      "Conspirazione"
-    ],
+    wizards: ["Nero", "Tessa", "Rebecca", "Jafar"],
+    schools: ["Distruzione", "Divinazione", "Illusione", "Necromanzia", "Trasmutazione", "Conspirazione"],
     rooms: [
-      // Stanze base (nome come sulle tessere)
       { name: "Stanza della Rosa Nera (BRW)", color: "black" },
       { name: "Stanza degli Specchi (BRW)", color: "blue" },
       { name: "Stanza dell'Oracolo (BRW)", color: "blue" },
@@ -42,11 +26,10 @@ const EXPANSIONS = {
       { name: "Sala del Trono (BRW)", color: "purple" },
       { name: "Cimiterio (BRW)", color: "gray" },
       { name: "Cripta (BRW)", color: "gray" },
-      { name: "Altare Sacrificale (BRW)" color: "gray" }
+      { name: "Altare Sacrificale (BRW)", color: "gray" } // Corretta virgola mancante qui
     ]
   },
-
-    sator: {
+  sator: {
     id: "sator",
     name: "Sator Box",
     wizards: ["Old Jukas", "Circe", "Telmia", "Corax", "Tlahuicole", "Vivian", "Skultor", "Bella (Sator)", "Eliumbra", "Howard", "Bronte", "D.Schiavon", "Dukas", "Arthur Vox", "Arianna (Sator)", "Baba Yaga", "Tora"],
@@ -99,16 +82,7 @@ const EXPANSIONS = {
     name: "Apocalisse",
     wizards: ["Mors", "Fames", "Pestilentia", "Bellum"],
     schools: ["Guerra", "Carestia", "Morte", "Pestilenza"],
-    rooms: [
-      { name: "Stanza della Rosa Nera (Apocalisse)", color: "black" }
-    ]
-  },
-  dreadForge: {
-    id: "dreadForge",
-    name: "Dread Forge",
-    wizards: ["Etna"],
-    schools: ["Forgia"],
-    rooms: [] // Nessuna stanza specifica elencata
+    rooms: [{ name: "Stanza della Rosa Nera (Apocalisse)", color: "black" }]
   },
   gaeaReborn: {
     id: "gaeaReborn",
@@ -126,64 +100,50 @@ const EXPANSIONS = {
     id: "sealOfFire",
     name: "Seal Of Fire",
     wizards: ["Prospero"],
-    rooms: [
-      { name: "Stanza della Rinascita", color: "gray" }
-    ]
+    rooms: [{ name: "Stanza della Rinascita", color: "gray" }]
   },
   antiquities: {
     id: "antiquities",
     name: "Antiquities",
     wizards: ["Cassandra"],
     schools: ["Oracolo"],
-    rooms: [
-      { name: "Arena Ludus", color: "red" }
-    ]
+    rooms: [{ name: "Arena Ludus", color: "red" }]
   },
   lastDinasty: {
     id: "lastDinasty",
     name: "Last Dinasty",
     wizards: ["Saba", "Imhotep"],
     schools: ["Heka"],
-    rooms: [
-      { name: "Santuario di Anubis", color: "yellow" }
-    ]
+    rooms: [{ name: "Santuario di Anubis", color: "yellow" }]
   },
   madness: {
     id: "madness",
     name: "Madness",
     wizards: ["Landolfo II"],
     schools: ["Caos"],
-    rooms: [
-      { name: "Altare Sacrificale della Follia", color: "gray" }
-    ]
+    rooms: [{ name: "Altare Sacrificale della Follia", color: "gray" }]
   },
   northWinds: {
     id: "northWinds",
     name: "North Winds",
     wizards: ["Kormac"],
     schools: ["Druidica"],
-    rooms: [
-      { name: "Abisso di Hel", color: "blue" }
-    ]
+    rooms: [{ name: "Abisso di Hel", color: "blue" }]
   },
   onceUponATime: {
     id: "onceUponATime",
     name: "Once Upon A Time",
     wizards: ["Maelice", "Hogwartz", "Venticello", "Bella"],
-    rooms: [
-      { name: "Sala del Trono di Teschi", color: "purple" }
-    ]
+    rooms: [{ name: "Sala del Trono di Teschi", color: "purple" }]
   },
   silkRoad: {
     id: "silkRoad",
     name: "Silk Road",
     wizards: ["Alisha", "Dai Jin", "Pyotr"],
-    rooms: [
-      { name: "Giardino Zen", color: "green" }
-    ]
+    rooms: [{ name: "Giardino Zen", color: "green" }]
   }
 };
-// Modalità / scenari (puoi ampliare o modificare)
+
 const scenarios = [
   "Partita standard: uccisioni + missioni + danni alla Loggia.",
   "Duello ad alta intensità: primo a 35 punti vince.",
@@ -204,15 +164,61 @@ function shuffle(array) {
   }
   return result;
 }
-/**
- * Estrae un subset. Se il numero richiesto è superiore alla disponibilità,
- * restituisce tutti gli elementi disponibili.
- */
+
 function getRandomSubset(array, count) {
   if (!array || array.length === 0) return [];
   const shuffled = shuffle(array);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
+
+/**
+ * LOGICA SPECIFICA ESTRAZIONE STANZE
+ */
+function estraiStanzeSecondoSchema(poolRooms) {
+    let finalSelection = [];
+    const schema = [
+        { color: "black", count: 1 },
+        { color: "purple", count: 3 }, // Gestito con Sala del Trono
+        { color: "yellow", count: 3 },
+        { color: "red", count: 3 },
+        { color: "green", count: 3 },
+        { color: "gray", count: 3 },
+        { color: "blue", count: 3 }
+    ];
+
+    for (const item of schema) {
+        let filtrate = poolRooms.filter(r => r.color === item.color);
+        
+        // Gestione speciale Purple (Sala del Trono)
+        if (item.color === "purple") {
+            let throneIndex = filtrate.findIndex(r => r.name.toLowerCase().includes("sala del trono"));
+            
+            if (throneIndex === -1) {
+                alert("L'espansione non contiene la stanza 'Sala del Trono'");
+                return null;
+            }
+            if (filtrate.length < item.count) {
+                alert(`L'espansione non contiene abbastanza stanze di colore ${item.color.toUpperCase()}`);
+                return null;
+            }
+
+            // Estrai il trono e poi altre 2 casuali
+            let trono = filtrate.splice(throneIndex, 1)[0];
+            let altrePurple = getRandomSubset(filtrate, item.count - 1);
+            finalSelection.push(trono, ...altrePurple);
+        } 
+        else {
+            // Gestione colori standard
+            if (filtrate.length < item.count) {
+                alert(`L'espansione non contiene abbastanza stanze di colore ${item.color.toUpperCase()}`);
+                return null;
+            }
+            finalSelection.push(...getRandomSubset(filtrate, item.count));
+        }
+    }
+    return finalSelection;
+}
+
 // ==========================
 // COSTRUZIONE DINAMICA UI
 // ==========================
@@ -223,7 +229,6 @@ function buildExpansionsUI() {
   expansionsArray.forEach(exp => {
     const label = document.createElement("label");
     label.className = "expansion-label";
-    
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.className = "expansion-checkbox";
@@ -231,15 +236,10 @@ function buildExpansionsUI() {
     if (exp.id === "core") checkbox.checked = true;
     label.appendChild(checkbox);
     label.appendChild(document.createTextNode(" " + exp.name));
-    if (exp.hint) {
-      const hint = document.createElement("span");
-      hint.className = "expansion-hint";
-      hint.textContent = exp.hint;
-      label.appendChild(hint);
-    }
     container.appendChild(label);
   });
 }
+
 // ==========================
 // LOGICA DI GENERAZIONE
 // ==========================
@@ -247,65 +247,61 @@ function generateSetup() {
   const checkboxes = document.querySelectorAll(".expansion-checkbox:checked");
   const selectedIds = Array.from(checkboxes).map(cb => cb.getAttribute("data-expansion-id"));
   const selectedExpansions = selectedIds.map(id => EXPANSIONS[id]);
+
   if (selectedExpansions.length === 0) {
     alert("Seleziona almeno una espansione!");
     return;
   }
-  // Pool Temporanei
+
   let poolWizards = [];
   let poolSchools = [];
   let poolRooms = [];
-  // Popolamento sicuro dei pool (controlla se la proprietà esiste)
+
   selectedExpansions.forEach(exp => {
-    if (exp.wizards && Array.isArray(exp.wizards)) {
-      poolWizards = [...new Set([...poolWizards, ...exp.wizards])];
-    }
-    if (exp.schools && Array.isArray(exp.schools)) {
-      poolSchools = [...new Set([...poolSchools, ...exp.schools])];
-    }
-    if (exp.rooms && Array.isArray(exp.rooms)) {
-      poolRooms = [...new Set([...poolRooms, ...exp.rooms])];
-    }
+    if (exp.wizards) poolWizards = [...new Set([...poolWizards, ...exp.wizards])];
+    if (exp.schools) poolSchools = [...new Set([...poolSchools, ...exp.schools])];
+    if (exp.rooms) poolRooms = [...poolRooms, ...exp.rooms]; // Manteniamo duplicati se servono per il sorteggio
   });
-  // Estrazione componenti (fino a 6, o meno se non disponibili)
+
   const finalWizards = getRandomSubset(poolWizards, 6);
   const finalSchools = getRandomSubset(poolSchools, 6);
   
-  // Per le stanze ne estraiamo solitamente tra 7 e 9 per il setup della Loggia
-  const finalRooms = getRandomSubset(poolRooms, 8);
+  // Applichiamo la nuova logica delle stanze
+  const finalRooms = estraiStanzeSecondoSchema(poolRooms);
+  
+  // Se finalRooms è null, la funzione è stata interrotta da un errore di disponibilità
+  if (!finalRooms) return;
+
   const finalScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
   renderResult(selectedExpansions, finalWizards, finalSchools, finalRooms, finalScenario);
 }
+
 // ==========================
 // RENDER RISULTATO
 // ==========================
 function renderResult(expansions, wizards, schools, rooms, scenario) {
   const resultSection = document.getElementById("result");
   resultSection.classList.remove("hidden");
-  // Visualizzazione Espansioni Usate
+
   document.getElementById("used-expansions").textContent = expansions.map(e => e.name).join(", ");
-  // Render Maghi
+
   const wizardsList = document.getElementById("wizards-list");
   wizardsList.innerHTML = wizards.length > 0 
     ? wizards.map(wiz => `<li><strong>${wiz}</strong></li>`).join('')
-    : "<li><em>Nessun mago disponibile nelle espansioni scelte</em></li>";
-  // Render Scuole
+    : "<li><em>Nessun mago disponibile</em></li>";
+
   const schoolsContainer = document.getElementById("schools-by-player");
-  if (schools.length > 0) {
-    schoolsContainer.innerHTML = "<ul>" + schools.map(s => `<li>${s}</li>`).join('') + "</ul>";
-  } else {
-    schoolsContainer.innerHTML = "<p><em>Nessuna scuola di magia disponibile</em></p>";
-  }
-  // Render Stanze
+  schoolsContainer.innerHTML = schools.length > 0 
+    ? "<ul>" + schools.map(s => `<li>${s}</li>`).join('') + "</ul>"
+    : "<p><em>Nessuna scuola disponibile</em></p>";
+
   const roomsList = document.getElementById("rooms-list");
-  roomsList.innerHTML = rooms.length > 0 
-    ? rooms.map(r => `<li>${r}</li>`).join('')
-    : "<li><em>Nessuna stanza disponibile</em></li>";
-  // Scenario
+  roomsList.innerHTML = rooms.map(r => `<li><span class="dot ${r.color}"></span> ${r.name}</li>`).join('');
+
   document.getElementById("scenario").textContent = scenario;
-  
   resultSection.scrollIntoView({ behavior: 'smooth' });
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   buildExpansionsUI();
   document.getElementById("generate-btn").addEventListener("click", generateSetup);
