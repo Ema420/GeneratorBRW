@@ -150,10 +150,13 @@ const EXPANSIONS = {
              "Bartholomaus"],
     schools: ["Lex"],
     rooms: [
-      { name: "Rosa Smeraldo", color: "black" },
-      { name: "Indoor Forest", color: "green" },
-      { name: "Thorny Clearing", color: "green" },
-      { name: "Life Fountain", color: "green" }
+      { name: "Stanza della Rosa Nera Occulta", color: "black" },
+      { name: "Cripta del Santo", color: "gray" },
+      { name: "Sala degli Evocatori Crociati", color: "red" },
+      { name: "Biblioteca dell'Ordine", color: "yellow" },
+      { name: "Sala del Tesoro Templare", color: "green" },
+      { name: "Sala dell'Oracolo Blasfemo", color: "blue" },
+      { name: "Armeria Templare", color: "purple" }
     ]
   },
 
@@ -164,10 +167,13 @@ const EXPANSIONS = {
              "Alhazred"],
     schools: ["Void"],
     rooms: [
-      { name: "Rosa Smeraldo", color: "black" },
-      { name: "Indoor Forest", color: "green" },
-      { name: "Thorny Clearing", color: "green" },
-      { name: "Life Fountain", color: "green" }
+      { name: "Sala della Rosa Nera Profonda", color: "black" },
+      { name: "Cimitero delle Balene", color: "gray" },
+      { name: "Laboratorio Alchemico Perduto", color: "red" },
+      { name: "Osservatorio Abissale", color: "yellow" },
+      { name: "Forgia del Vuoto", color: "green" },
+      { name: "Abisso della Fede", color: "blue" },
+      { name: "Camera dei Piaceri Antica", color: "purple" }
     ]
   },
 
