@@ -299,6 +299,7 @@ const scenarios = [
 // FUNZIONI DI UTILITÀ
 // ==========================
 function shuffle(array) {
+  if (!array) return [];
   const result = array.slice();
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -306,7 +307,12 @@ function shuffle(array) {
   }
   return result;
 }
+/**
+ * Estrae un subset. Se il numero richiesto è superiore alla disponibilità,
+ * restituisce tutti gli elementi disponibili.
+ */
 function getRandomSubset(array, count) {
+  if (!array || array.length === 0) return [];
   const shuffled = shuffle(array);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
@@ -316,7 +322,6 @@ function getRandomSubset(array, count) {
 function buildExpansionsUI() {
   const container = document.getElementById("expansions-container");
   if (!container) return;
-  // Pulizia e ordinamento
   const expansionsArray = Object.values(EXPANSIONS).sort((a, b) => a.name.localeCompare(b.name));
   expansionsArray.forEach(exp => {
     const label = document.createElement("label");
@@ -349,22 +354,28 @@ function generateSetup() {
     alert("Seleziona almeno una espansione!");
     return;
   }
-  // Creazione Pool Totale
+  // Pool Temporanei
   let poolWizards = [];
   let poolSchools = [];
   let poolRooms = [];
+  // Popolamento sicuro dei pool (controlla se la proprietà esiste)
   selectedExpansions.forEach(exp => {
-    poolWizards = [...new Set([...poolWizards, ...exp.wizards])];
-    poolSchools = [...new Set([...poolSchools, ...exp.schools])];
-    poolRooms = [...new Set([...poolRooms, ...exp.rooms])];
+    if (exp.wizards && Array.isArray(exp.wizards)) {
+      poolWizards = [...new Set([...poolWizards, ...exp.wizards])];
+    }
+    if (exp.schools && Array.isArray(exp.schools)) {
+      poolSchools = [...new Set([...poolSchools, ...exp.schools])];
+    }
+    if (exp.rooms && Array.isArray(exp.rooms)) {
+      poolRooms = [...new Set([...poolRooms, ...exp.rooms])];
+    }
   });
-  // Estrazione di 6 Maghi e 6 Scuole (indipendente dai giocatori)
+  // Estrazione componenti (fino a 6, o meno se non disponibili)
   const finalWizards = getRandomSubset(poolWizards, 6);
   const finalSchools = getRandomSubset(poolSchools, 6);
   
-  // Estrazione Stanze (6-9 tessere)
-  const finalRooms = getRandomSubset(poolRooms, 7);
-  // Scenario
+  // Per le stanze ne estraiamo solitamente tra 7 e 9 per il setup della Loggia
+  const finalRooms = getRandomSubset(poolRooms, 8);
   const finalScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
   renderResult(selectedExpansions, finalWizards, finalSchools, finalRooms, finalScenario);
 }
@@ -374,38 +385,28 @@ function generateSetup() {
 function renderResult(expansions, wizards, schools, rooms, scenario) {
   const resultSection = document.getElementById("result");
   resultSection.classList.remove("hidden");
-  // Espansioni
+  // Visualizzazione Espansioni Usate
   document.getElementById("used-expansions").textContent = expansions.map(e => e.name).join(", ");
-  // Maghi (Pool di 6)
+  // Render Maghi
   const wizardsList = document.getElementById("wizards-list");
-  wizardsList.innerHTML = "";
-  wizards.forEach(wiz => {
-    const li = document.createElement("li");
-    li.innerHTML = `<strong>${wiz}</strong>`;
-    wizardsList.appendChild(li);
-  });
-  // Scuole di Magia (Pool di 6)
-  // Usiamo il div esistente schools-by-player ma lo formattiamo come lista semplice
+  wizardsList.innerHTML = wizards.length > 0 
+    ? wizards.map(wiz => `<li><strong>${wiz}</strong></li>`).join('')
+    : "<li><em>Nessun mago disponibile nelle espansioni scelte</em></li>";
+  // Render Scuole
   const schoolsContainer = document.getElementById("schools-by-player");
-  schoolsContainer.innerHTML = "<ul id='final-schools-list'></ul>";
-  const schoolsList = document.getElementById("final-schools-list");
-  schools.forEach(school => {
-    const li = document.createElement("li");
-    li.textContent = school;
-    schoolsList.appendChild(li);
-  });
-  // Stanze
+  if (schools.length > 0) {
+    schoolsContainer.innerHTML = "<ul>" + schools.map(s => `<li>${s}</li>`).join('') + "</ul>";
+  } else {
+    schoolsContainer.innerHTML = "<p><em>Nessuna scuola di magia disponibile</em></p>";
+  }
+  // Render Stanze
   const roomsList = document.getElementById("rooms-list");
-  roomsList.innerHTML = "";
-  rooms.forEach(room => {
-    const li = document.createElement("li");
-    li.textContent = room;
-    roomsList.appendChild(li);
-  });
+  roomsList.innerHTML = rooms.length > 0 
+    ? rooms.map(r => `<li>${r}</li>`).join('')
+    : "<li><em>Nessuna stanza disponibile</em></li>";
   // Scenario
   document.getElementById("scenario").textContent = scenario;
   
-  // Scroll automatico al risultato
   resultSection.scrollIntoView({ behavior: 'smooth' });
 }
 document.addEventListener("DOMContentLoaded", () => {
