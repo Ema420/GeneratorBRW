@@ -146,8 +146,7 @@ const EXPANSIONS = {
   duelLex: {
     id: "lex",
     name: "Duel Lex",
-    wizards: ["Ulrich",
-             "Bartholomaus"],
+    wizards: ["Ulrich", "Bartholomaus"],
     schools: ["Lex"],
     rooms: [
       { name: "Stanza della Rosa Nera Occulta", color: "black" },
@@ -163,8 +162,7 @@ const EXPANSIONS = {
   duelVoid: {
     id: "void",
     name: "Duel Void",
-    wizards: ["Alice",
-             "Alhazred"],
+    wizards: ["Alice", "Alhazred"],
     schools: ["Void"],
     rooms: [
       { name: "Sala della Rosa Nera Profonda", color: "black" },
