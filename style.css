@@ -160,6 +160,21 @@ footer {
   display: none;
 }
 
+.expansion-label {
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+.expansion-label:hover {
+  background: rgba(60, 60, 120, 0.4);
+}
+.expansion-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: #a0a0ff;
+  margin-left: 1.5rem;
+}
+
 /* Responsive */
 @media (min-width: 768px) {
   .controls {
