@@ -81,4 +81,54 @@
         <p id="used-expansions"></p>
       </div>
 
-      <div class="result
+      <div class="result-block">
+        <h4>Maghi</h4>
+        <ul id="wizards-list"></ul>
+      </div>
+
+      <div class="result-block">
+        <h4>Scuole di magia per giocatore</h4>
+        <div id="schools-by-player"></div>
+      </div>
+
+      <div class="result-block">
+        <h4>Stanze della Loggia</h4>
+        <ul id="rooms-list"></ul>
+      </div>
+
+      <div class="result-block">
+        <h4>Modalità / Scenario</h4>
+        <p id="scenario"></p>
+      </div>
+
+      <button id="regenerate-btn">Rigenera con le stesse impostazioni</button>
+    </section>
+
+    <section class="help">
+      <h3>Come funziona</h3>
+      <p>
+        1. Seleziona il numero di giocatori e le espansioni che possiedi o vuoi usare.<br>
+        2. Clicca su <strong>“Genera Setup”</strong> per ottenere:
+      </p>
+      <ul>
+        <li>Un mago casuale per ogni giocatore, pescato da tutte le espansioni selezionate.</li>
+        <li>Un set di scuole di magia per ciascun mago (es. 2 per giocatore).</li>
+        <li>Un set di stanze casuali per la Loggia, composte dalle espansioni scelte.</li>
+        <li>Una modalità / scenario suggerito.</li>
+      </ul>
+      <p>
+        Puoi modificare liberamente i contenuti delle espansioni nel file
+        <code>script.js</code> (maghi, scuole, stanze) per adattare il tool alla tua collezione.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Fan-made tool per uso personale, non ufficiale né affiliato con Ludus Magnus Studio.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
