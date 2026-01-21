@@ -24,268 +24,165 @@ const EXPANSIONS = {
     ],
     rooms: [
       // Stanze base (nome come sulle tessere)
-      "Stanza della Rosa Nera (BRW)",
-      "Stanza degli Specchi (BRW)",
-      "Stanza dell'Oracolo (BRW)",
-      "L'Abisso (BRW)",
-      "Biblioteca (BRW)",
-      "Osservatorio (BRW)",
-      "Santuario (BRW)",
-      "Forgia (BRW)",
-      "Giardino (BRW)",
-      "Sala del Tesoro (BRW)",
-      "Laboratorio Alchemico (BRW)",
-      "Arena (BRW)",
-      "Sala degli Evocatori (BRW)",
-      "Armeria (BRW)",
-      "Stanza dei Piaceri (BRW)",
-      "Sala del Trono (BRW)",
-      "Cimiterio (BRW)",
-      "Cripta (BRW)",
-      "Altare Sacrificale (BRW)"
+      { name: "Stanza della Rosa Nera (BRW)", color: "black" },
+      { name: "Stanza degli Specchi (BRW)", color: "blue" },
+      { name: "Stanza dell'Oracolo (BRW)", color: "blue" },
+      { name: "L'Abisso (BRW)", color: "blue" },
+      { name: "Biblioteca (BRW)", color: "yellow" },
+      { name: "Osservatorio (BRW)", color: "yellow" },
+      { name: "Santuario (BRW)", color: "yellow" },
+      { name: "Forgia (BRW)",  color: "green" },
+      { name: "Giardino (BRW)", color: "green" },
+      { name: "Sala del Tesoro (BRW)", color: "green" },
+      { name: "Laboratorio Alchemico (BRW)", color: "red" },
+      { name: "Arena (BRW)", color: "red" },
+      { name: "Sala degli Evocatori (BRW)", color: "red" },
+      { name: "Armeria (BRW)", color: "purple" },
+      { name: "Stanza dei Piaceri (BRW)", color: "purple" },
+      { name: "Sala del Trono (BRW)", color: "purple" },
+      { name: "Cimiterio (BRW)", color: "gray" },
+      { name: "Cripta (BRW)", color: "gray" },
+      { name: "Altare Sacrificale (BRW)" color: "gray" }
     ]
   },
 
-  sator: {
+    sator: {
     id: "sator",
     name: "Sator Box",
-    wizards: [
-      // Esempio: rinomina con i maghi reali dell'espansione
-      "Old Jukas",
-      "Circe",
-      "Telmia",
-      "Corax",
-      "Tlahuicole",
-      "Vivian",
-      "Skultor",
-      "Bella (Sator)",
-      "Eliumbra",
-      "Howard",
-      "Bronte",
-      "D.Schiavon",
-      "Dukas",
-      "Arthur Vox",
-      "Arianna (Sator)",
-      "Baba Yaga",
-      "Tora"
-    ],
-    schools: [
-      // Scuola specifica dell'espansione
-      "Vuoto",
-      "Sangue",
-      "Mente",
-      "Cronomanzia",
-      "Incantamento",
-      "Cartomanzia",
-      "Omnia",
-      "Bardica",
-      "Demonologia",
-      "Elementale",
-      "Trickery"
-    ],
+    wizards: ["Old Jukas", "Circe", "Telmia", "Corax", "Tlahuicole", "Vivian", "Skultor", "Bella (Sator)", "Eliumbra", "Howard", "Bronte", "D.Schiavon", "Dukas", "Arthur Vox", "Arianna (Sator)", "Baba Yaga", "Tora"],
+    schools: ["Vuoto", "Sangue", "Mente", "Cronomanzia", "Incantamento", "Cartomanzia", "Omnia", "Bardica", "Demonologia", "Elementale", "Trickery"],
     rooms: [
-      "Cursed Temple",
-      "Alehouse",
-      "Eerie Machinery",
-      "Cyclop's Forge",
-      "Assassin's Brotherhood",
-      "Garden of Ice and Fire",
-      "Cyclop's Room",
-      "Card's Room",
-      "Pigmen's Room",
-      "Horologium",
-      "Theater",
-      "Clinging Swamn",
-      "Tana dei Troll"
+      { name: "Cursed Temple", color: "gray" },
+      { name: "Alehouse", color: "yellow" },
+      { name: "Eerie Machinery", color: "yellow" },
+      { name: "Cyclop's Forge", color: "yellow" },
+      { name: "Assassin's Brotherhood", color: "red" },
+      { name: "Garden of Ice and Fire", color: "red" },
+      { name: "Cyclop's Room", color: "red" },
+      { name: "Card's Room", color: "purple" },
+      { name: "Pigmen's Room", color: "purple" },
+      { name: "Horologium", color: "blue" },
+      { name: "Theater", color: "blue" },
+      { name: "Clinging Swamn", color: "green" },
+      { name: "Tana dei Troll", color: "green" }
     ]
   },
-
   rebirth: {
     id: "rebirth",
     name: "BRW Rebirth",
-    wizards: [
-      "Arianna (Rebirth)",
-      "Baron Doria",
-      "Gramigna",
-      "Angela",
-      "Sefu",
-      "Rikkart"
-    ],
-    schools: [
-      "Tecnomanzia",
-      "Sciamanica",
-      "Alchimia",
-      "Malocchio",
-      "Incubo",
-      "Agonia"
-    ],
+    wizards: ["Arianna (Rebirth)", "Baron Doria", "Gramigna", "Angela", "Sefu", "Rikkart"],
+    schools: ["Tecnomanzia", "Sciamanica", "Alchimia", "Malocchio", "Incubo", "Agonia"],
     rooms: [
-      "Stanza della Rosa Nera",
-      "Stanza degli Specchi",
-      "Stanza dell'Oracolo",
-      "L'Abisso",
-      "Biblioteca",
-      "Osservatorio",
-      "Santuario",
-      "Forgia",
-      "Giardino",
-      "Sala del Tesoro",
-      "Laboratorio Alchemico",
-      "Arena",
-      "Sala degli Evocatori",
-      "Armeria",
-      "Stanza dei Piaceri",
-      "Sala del Trono",
-      "Cimiterio",
-      "Cripta",
-      "Altare Sacrificale"
+      { name: "Stanza della Rosa Nera", color: "black" },
+      { name: "Stanza degli Specchi", color: "blue" },
+      { name: "Stanza dell'Oracolo", color: "blue" },
+      { name: "L'Abisso", color: "blue" },
+      { name: "Biblioteca", color: "yellow" },
+      { name: "Osservatorio", color: "yellow" },
+      { name: "Santuario", color: "yellow" },
+      { name: "Forgia", color: "green" },
+      { name: "Giardino", color: "green" },
+      { name: "Sala del Tesoro", color: "green" },
+      { name: "Laboratorio Alchemico", color: "red" },
+      { name: "Arena", color: "red" },
+      { name: "Sala degli Evocatori", color: "red" },
+      { name: "Armeria", color: "purple" },
+      { name: "Stanza dei Piaceri", color: "purple" },
+      { name: "Sala del Trono", color: "purple" },
+      { name: "Cimiterio", color: "gray" },
+      { name: "Cripta", color: "gray" },
+      { name: "Altare Sacrificale", color: "gray" }
     ]
   },
-
   apocalypse: {
     id: "apocalypse",
     name: "Apocalisse",
-    wizards: [
-      "Mors",
-      "Fames",
-      "Pestilentia",
-      "Bellum"
-    ],
-    schools: [
-      "Guerra",
-      "Carestia",
-      "Morte",
-      "Pestilenza"
-    ],
+    wizards: ["Mors", "Fames", "Pestilentia", "Bellum"],
+    schools: ["Guerra", "Carestia", "Morte", "Pestilenza"],
     rooms: [
-      "Stanza della Rosa Nera (Apocalisse)"
+      { name: "Stanza della Rosa Nera (Apocalisse)", color: "black" }
     ]
   },
-
   dreadForge: {
     id: "dreadForge",
     name: "Dread Forge",
-    wizards: [
-      "Etna"
-    ],
-    schools: [
-      "Forgia"
-    ]
+    wizards: ["Etna"],
+    schools: ["Forgia"],
+    rooms: [] // Nessuna stanza specifica elencata
   },
-
   gaeaReborn: {
     id: "gaeaReborn",
     name: "Gaea Reborn",
-    wizards: [
-      "Talia"
-    ],
-    schools: [
-      "Geomanzia"
-    ],
+    wizards: ["Talia"],
+    schools: ["Geomanzia"],
     rooms: [
-      "Rosa Smeraldo",
-      "Indoor Forest",
-      "Thorny Clearing",
-      "Life Fountain"
+      { name: "Rosa Smeraldo", color: "black" },
+      { name: "Indoor Forest", color: "green" },
+      { name: "Thorny Clearing", color: "green" },
+      { name: "Life Fountain", color: "green" }
     ]
   },
-
   sealOfFire: {
     id: "sealOfFire",
     name: "Seal Of Fire",
-    wizards: [
-      "Prospero"
-    ],
+    wizards: ["Prospero"],
     rooms: [
-      "Stanza della Rinascita"
+      { name: "Stanza della Rinascita", color: "gray" }
     ]
   },
-
-   antiquities: {
+  antiquities: {
     id: "antiquities",
     name: "Antiquities",
-    wizards: [
-      "Cassandra"
-    ],
-    schools: [
-      "Oracolo"
-    ],
+    wizards: ["Cassandra"],
+    schools: ["Oracolo"],
     rooms: [
-      "Arena Ludus"
+      { name: "Arena Ludus", color: "red" }
     ]
   },
-
   lastDinasty: {
     id: "lastDinasty",
     name: "Last Dinasty",
-    wizards: [
-      "Saba",
-      "Imhotep"
-    ],
-    schools: [
-      "Heka"
-    ],
+    wizards: ["Saba", "Imhotep"],
+    schools: ["Heka"],
     rooms: [
-      "Santuario di Anubis"
+      { name: "Santuario di Anubis", color: "yellow" }
     ]
   },
-
   madness: {
     id: "madness",
     name: "Madness",
-    wizards: [
-      "Landolfo II"
-    ],
-    schools: [
-      "Caos"
-    ],
+    wizards: ["Landolfo II"],
+    schools: ["Caos"],
     rooms: [
-      "Altare Sacrificale della Follia"
+      { name: "Altare Sacrificale della Follia", color: "gray" }
     ]
   },
-
   northWinds: {
     id: "northWinds",
     name: "North Winds",
-    wizards: [
-      "Kormac"
-    ],
-    schools: [
-      "Druidica"
-    ],
+    wizards: ["Kormac"],
+    schools: ["Druidica"],
     rooms: [
-      "Abisso di Hel"
+      { name: "Abisso di Hel", color: "blue" }
     ]
   },
-
   onceUponATime: {
     id: "onceUponATime",
     name: "Once Upon A Time",
-    wizards: [
-      "Maelice",
-      "Hogwartz",
-      "Venticello",
-      "Bella"
-    ],
+    wizards: ["Maelice", "Hogwartz", "Venticello", "Bella"],
     rooms: [
-      "Sala del Trono di Teschi"
+      { name: "Sala del Trono di Teschi", color: "purple" }
     ]
   },
-
   silkRoad: {
     id: "silkRoad",
     name: "Silk Road",
-    wizards: [
-      "Alisha",
-      "Dai Jin",
-      "Pyotr"
-    ],
+    wizards: ["Alisha", "Dai Jin", "Pyotr"],
     rooms: [
-      "Giardino Zen"
+      { name: "Giardino Zen", color: "green" }
     ]
   }
 };
-
 // Modalità / scenari (puoi ampliare o modificare)
 const scenarios = [
   "Partita standard: uccisioni + missioni + danni alla Loggia.",
