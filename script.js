@@ -320,14 +320,16 @@ function generateSetup() {
   // Se finalRooms è null, la funzione è stata interrotta da un errore di disponibilità
   if (!finalRooms) return;
 
-  const finalScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
-  renderResult(selectedExpansions, finalWizards, finalSchools, finalRooms, finalScenario);
+  //const finalScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+  //renderResult(selectedExpansions, finalWizards, finalSchools, finalRooms, finalScenario);
+  renderResult(selectedExpansions, finalWizards, finalSchools, finalRooms);
 }
 
 // ==========================
 // RENDER RISULTATO
 // ==========================
-function renderResult(expansions, wizards, schools, rooms, scenario) {
+//function renderResult(expansions, wizards, schools, rooms, scenario) {
+function renderResult(expansions, wizards, schools, rooms) {
   const resultSection = document.getElementById("result");
   resultSection.classList.remove("hidden");
 
@@ -346,7 +348,7 @@ function renderResult(expansions, wizards, schools, rooms, scenario) {
   const roomsList = document.getElementById("rooms-list");
   roomsList.innerHTML = rooms.map(r => `<li><span class="dot ${r.color}"></span> ${r.name}</li>`).join('');
 
-  document.getElementById("scenario").textContent = scenario;
+  //document.getElementById("scenario").textContent = scenario;
   resultSection.scrollIntoView({ behavior: 'smooth' });
 }
 
