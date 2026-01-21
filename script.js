@@ -298,9 +298,6 @@ const scenarios = [
 // ==========================
 // FUNZIONI DI UTILITÀ
 // ==========================
-function getRandomElement(array) {
-  return array[Math.floor(Math.random() * array.length)];
-}
 function shuffle(array) {
   const result = array.slice();
   for (let i = result.length - 1; i > 0; i--) {
@@ -309,162 +306,93 @@ function shuffle(array) {
   }
   return result;
 }
-// Estrae 'count' elementi casuali da 'array' (senza ripetizioni)
 function getRandomSubset(array, count) {
   const shuffled = shuffle(array);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 // ==========================
-// COSTRUZIONE DINAMICA UI ESPANSIONI
+// COSTRUZIONE DINAMICA UI
 // ==========================
 function buildExpansionsUI() {
   const container = document.getElementById("expansions-container");
   if (!container) return;
-  // Mantieni l'etichetta iniziale "Espansioni disponibili:"
-  // e poi aggiungi i checkbox generati
-  const labelElement = container.querySelector("label");
-  // Se non c'è nessun label di base, ne creiamo uno
-  if (!labelElement) {
-    const mainLabel = document.createElement("label");
-    mainLabel.textContent = "Espansioni disponibili:";
-    container.appendChild(mainLabel);
-  }
-  // Ordina le espansioni per nome, giusto per bellezza
-  const expansionsArray = Object.values(EXPANSIONS).sort((a, b) =>
-    a.name.localeCompare(b.name, "it", { sensitivity: "base" })
-  );
-  expansionsArray.forEach((exp, index) => {
+  // Pulizia e ordinamento
+  const expansionsArray = Object.values(EXPANSIONS).sort((a, b) => a.name.localeCompare(b.name));
+  expansionsArray.forEach(exp => {
     const label = document.createElement("label");
     label.className = "expansion-label";
+    
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.className = "expansion-checkbox";
     checkbox.setAttribute("data-expansion-id", exp.id);
-    // Scelta: la core box è di solito selezionata di default
-    if (exp.id === "core") {
-      checkbox.checked = true;
-    }
+    if (exp.id === "core") checkbox.checked = true;
     label.appendChild(checkbox);
-    // Nome espansione
-    const textNode = document.createTextNode(" " + exp.name);
-    label.appendChild(textNode);
-    // Hint opzionale
+    label.appendChild(document.createTextNode(" " + exp.name));
     if (exp.hint) {
-      const hintSpan = document.createElement("span");
-      hintSpan.className = "expansion-hint";
-      hintSpan.textContent = exp.hint;
-      label.appendChild(hintSpan);
+      const hint = document.createElement("span");
+      hint.className = "expansion-hint";
+      hint.textContent = exp.hint;
+      label.appendChild(hint);
     }
     container.appendChild(label);
   });
 }
 // ==========================
-// RECUPERO ESPANSIONI SCELTE
-// ==========================
-function getSelectedExpansionIds() {
-  const checkboxes = document.querySelectorAll(".expansion-checkbox");
-  const selectedIds = [];
-  checkboxes.forEach(cb => {
-    if (cb.checked) {
-      const id = cb.getAttribute("data-expansion-id");
-      if (id) selectedIds.push(id);
-    }
-  });
-  return selectedIds;
-}
-function getSelectedExpansions() {
-  const ids = getSelectedExpansionIds();
-  return ids.map(id => EXPANSIONS[id]).filter(Boolean);
-}
-// ==========================
-// GENERAZIONE SETUP
+// LOGICA DI GENERAZIONE
 // ==========================
 function generateSetup() {
-  const playersSelect = document.getElementById("players");
-  const playersCount = parseInt(playersSelect.value, 10);
-  const noDuplicates = document.getElementById("noDuplicates").checked;
-  const selectedExpansions = getSelectedExpansions();
+  const checkboxes = document.querySelectorAll(".expansion-checkbox:checked");
+  const selectedIds = Array.from(checkboxes).map(cb => cb.getAttribute("data-expansion-id"));
+  const selectedExpansions = selectedIds.map(id => EXPANSIONS[id]);
   if (selectedExpansions.length === 0) {
-    alert("Seleziona almeno una espansione prima di generare il setup.");
+    alert("Seleziona almeno una espansione!");
     return;
   }
-  // ----- Costruzione dei pool dagli expansion scelti -----
-  let allWizards = [];
-  let allSchools = [];
-  let allRooms = [];
+  // Creazione Pool Totale
+  let poolWizards = [];
+  let poolSchools = [];
+  let poolRooms = [];
   selectedExpansions.forEach(exp => {
-    allWizards = allWizards.concat(exp.wizards || []);
-    allSchools = allSchools.concat(exp.schools || []);
-    allRooms = allRooms.concat(exp.rooms || []);
+    poolWizards = [...new Set([...poolWizards, ...exp.wizards])];
+    poolSchools = [...new Set([...poolSchools, ...exp.schools])];
+    poolRooms = [...new Set([...poolRooms, ...exp.rooms])];
   });
-  // Controlli minimi
-  if (allWizards.length < playersCount) {
-    alert("Non ci sono abbastanza maghi nelle espansioni selezionate per il numero di giocatori.");
-    return;
-  }
-  if (allSchools.length === 0) {
-    alert("Nessuna scuola di magia trovata nelle espansioni selezionate.");
-    return;
-  }
-  if (allRooms.length === 0) {
-    alert("Nessuna stanza/tessera loggia trovata nelle espansioni selezionate.");
-    return;
-  }
-  // ----- Selezione maghi -----
-  const selectedWizards = getRandomSubset(allWizards, playersCount);
-  // ----- Assegnazione scuole -----
-  // Di base 2 scuole per giocatore (puoi cambiare)
-  const schoolsPerPlayer = 2;
-  const schoolsByPlayer = {};
-  let poolForNoDup = shuffle(allSchools);
-  for (let i = 0; i < playersCount; i++) {
-    const playerName = `Giocatore ${i + 1} (${selectedWizards[i]})`;
-    if (noDuplicates) {
-      if (poolForNoDup.length < schoolsPerPlayer) {
-        // se il pool si esaurisce, si ricostruisce (con possibili ripetizioni)
-        poolForNoDup = poolForNoDup.concat(shuffle(allSchools));
-      }
-      const chosen = poolForNoDup.slice(0, schoolsPerPlayer);
-      poolForNoDup = poolForNoDup.slice(schoolsPerPlayer);
-      schoolsByPlayer[playerName] = chosen;
-    } else {
-      schoolsByPlayer[playerName] = getRandomSubset(allSchools, schoolsPerPlayer);
-    }
-  }
-  // ----- Selezione stanze -----
-  // Esempio: 6–8 stanze
-  const roomsCount = 6 + Math.floor(Math.random() * 3); // 6,7,8
-  const selectedRooms = getRandomSubset(allRooms, roomsCount);
-  // ----- Scenario -----
-  const selectedScenario = getRandomElement(scenarios);
-  // ----- Render -----
-  renderResult(selectedExpansions, selectedWizards, schoolsByPlayer, selectedRooms, selectedScenario);
+  // Estrazione di 6 Maghi e 6 Scuole (indipendente dai giocatori)
+  const finalWizards = getRandomSubset(poolWizards, 6);
+  const finalSchools = getRandomSubset(poolSchools, 6);
+  
+  // Estrazione Stanze (6-9 tessere)
+  const finalRooms = getRandomSubset(poolRooms, 7);
+  // Scenario
+  const finalScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+  renderResult(selectedExpansions, finalWizards, finalSchools, finalRooms, finalScenario);
 }
 // ==========================
 // RENDER RISULTATO
 // ==========================
-function renderResult(expansions, wizards, schoolsByPlayer, rooms, scenario) {
+function renderResult(expansions, wizards, schools, rooms, scenario) {
   const resultSection = document.getElementById("result");
   resultSection.classList.remove("hidden");
-  // Espansioni usate
-  const usedExpansionsEl = document.getElementById("used-expansions");
-  usedExpansionsEl.textContent = expansions.map(e => e.name).join(", ");
-  // Maghi
+  // Espansioni
+  document.getElementById("used-expansions").textContent = expansions.map(e => e.name).join(", ");
+  // Maghi (Pool di 6)
   const wizardsList = document.getElementById("wizards-list");
   wizardsList.innerHTML = "";
-  wizards.forEach((wiz, index) => {
+  wizards.forEach(wiz => {
     const li = document.createElement("li");
-    li.textContent = `Giocatore ${index + 1}: ${wiz}`;
+    li.innerHTML = `<strong>${wiz}</strong>`;
     wizardsList.appendChild(li);
   });
-  // Scuole per giocatore
+  // Scuole di Magia (Pool di 6)
+  // Usiamo il div esistente schools-by-player ma lo formattiamo come lista semplice
   const schoolsContainer = document.getElementById("schools-by-player");
-  schoolsContainer.innerHTML = "";
-  Object.keys(schoolsByPlayer).forEach(playerName => {
-    const div = document.createElement("div");
-    const schools = schoolsByPlayer[playerName];
-    div.innerHTML = `<strong>${playerName}</strong>: ${schools.join(", ")}`;
-    schoolsContainer.appendChild(div);
+  schoolsContainer.innerHTML = "<ul id='final-schools-list'></ul>";
+  const schoolsList = document.getElementById("final-schools-list");
+  schools.forEach(school => {
+    const li = document.createElement("li");
+    li.textContent = school;
+    schoolsList.appendChild(li);
   });
   // Stanze
   const roomsList = document.getElementById("rooms-list");
@@ -475,17 +403,13 @@ function renderResult(expansions, wizards, schoolsByPlayer, rooms, scenario) {
     roomsList.appendChild(li);
   });
   // Scenario
-  const scenarioEl = document.getElementById("scenario");
-  scenarioEl.textContent = scenario;
+  document.getElementById("scenario").textContent = scenario;
+  
+  // Scroll automatico al risultato
+  resultSection.scrollIntoView({ behavior: 'smooth' });
 }
-// ==========================
-// EVENT LISTENERS
-// ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  // Costruisce dinamicamente la sezione espansioni
   buildExpansionsUI();
-  const generateBtn = document.getElementById("generate-btn");
-  const regenerateBtn = document.getElementById("regenerate-btn");
-  generateBtn.addEventListener("click", generateSetup);
-  regenerateBtn.addEventListener("click", generateSetup);
+  document.getElementById("generate-btn").addEventListener("click", generateSetup);
+  document.getElementById("regenerate-btn").addEventListener("click", generateSetup);
 });
