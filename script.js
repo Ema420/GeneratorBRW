@@ -144,7 +144,7 @@ const EXPANSIONS = {
   },
 
   duelLex: {
-    id: "lex",
+    id: "duelLex",
     name: "Duel Lex",
     wizards: ["Ulrich", "Bartholomaus"],
     schools: ["Lex"],
@@ -160,7 +160,7 @@ const EXPANSIONS = {
   },
 
   duelVoid: {
-    id: "void",
+    id: "duelVoid",
     name: "Duel Void",
     wizards: ["Alice", "Alhazred"],
     schools: ["Void"],
@@ -176,7 +176,7 @@ const EXPANSIONS = {
   },
 
   duelKami: {
-    id: "kami",
+    id: "duelKami",
     name: "Duel Kami",
     wizards: ["Abe No Seimei",
              "En No Gyoja"],
