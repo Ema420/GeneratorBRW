@@ -1,175 +1,284 @@
-/* Reset base semplice */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+// =====================================
+// DEFINIZIONE ESPANSIONI (PERSONALIZZA)
+// =====================================
+
+const EXPANSIONS = {
+  core: {
+    id: "core",
+    name: "Core Box",
+    wizards: [
+      // Maghi base (sostituisci con elenco reale)
+      "Johan",
+      "Nero",
+      "Tessa",
+      "Rebecca",
+      "Marco",
+      "Aaron",
+      "Loki",
+      "Gwen"
+    ],
+    schools: [
+      // Scuole di magia base
+      "Distruzione",
+      "Conoscenza",
+      "Illusione",
+      "Necromanzia",
+      "Trasmutazione",
+      "Conspiracy"
+    ],
+    rooms: [
+      // Stanze base (nome come sulle tessere)
+      "Biblioteca",
+      "Cimitero",
+      "Laboratorio Alchemico",
+      "Giardino delle Illusioni",
+      "Sala dei Portali",
+      "Camera delle Catene",
+      "Sala del Trono",
+      "Forgia Magica"
+    ]
+  },
+
+  crono: {
+    id: "crono",
+    name: "Crono",
+    wizards: [
+      // Esempio: rinomina con i maghi reali dell'espansione
+      "Cronomante A",
+      "Cronomante B"
+    ],
+    schools: [
+      // Scuola specifica dell'espansione
+      "Crono"
+    ],
+    rooms: [
+      "Sala del Tempo Spezzato",
+      "Osservatorio Temporale"
+    ]
+  },
+
+  inferno: {
+    id: "inferno",
+    name: "Inferno",
+    wizards: [
+      "Demone A",
+      "Demone B"
+    ],
+    schools: [
+      "Inferno"
+    ],
+    rooms: [
+      "Sala delle Fiamme Eterne",
+      "Abisso di Zaffiro"
+    ]
+  },
+
+  divination: {
+    id: "divination",
+    name: "Divination",
+    wizards: [
+      "Veggente A",
+      "Veggente B"
+    ],
+    schools: [
+      "Divination"
+    ],
+    rooms: [
+      "Sala degli Oracoli",
+      "Specchio del Fato"
+    ]
+  }
+};
+
+// Modalità / scenari (puoi ampliare o modificare)
+const scenarios = [
+  "Partita standard: uccisioni + missioni + danni alla Loggia.",
+  "Duello ad alta intensità: primo a 35 punti vince.",
+  "Partita lunga: gioca fino alla distruzione totale della Loggia.",
+  "Modalità a squadre: 2 vs 2, sommate i punti dei membri del team.",
+  "Battaglia rapida: riduci il numero di round del Black Rose Track."
+];
+
+// ==========================
+// FUNZIONI DI UTILITÀ
+// ==========================
+
+function getRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #1a1a2e 0, #000 60%);
-  color: #f1f1f1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+function shuffle(array) {
+  const result = array.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
 }
 
-header {
-  text-align: center;
-  padding: 1.5rem 1rem 0.5rem;
+// Estrae 'count' elementi casuali da 'array' (senza ripetizioni)
+function getRandomSubset(array, count) {
+  const shuffled = shuffle(array);
+  return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
-header h1 {
-  font-size: 2.2rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+// ==========================
+// RECUPERO ESPANSIONI SCELTE
+// ==========================
+
+function getSelectedExpansionIds() {
+  const checkboxes = document.querySelectorAll(".expansion-checkbox");
+  const selectedIds = [];
+
+  checkboxes.forEach(cb => {
+    if (cb.checked) {
+      const id = cb.getAttribute("data-expansion-id");
+      if (id) selectedIds.push(id);
+    }
+  });
+
+  return selectedIds;
 }
 
-header h2 {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #bbbbff;
-  margin-top: 0.5rem;
+function getSelectedExpansions() {
+  const ids = getSelectedExpansionIds();
+  return ids.map(id => EXPANSIONS[id]).filter(Boolean);
 }
 
-main {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 1rem;
-  flex: 1;
-}
+// ==========================
+// GENERAZIONE SETUP
+// ==========================
 
-section {
-  background: rgba(10, 10, 25, 0.9);
-  border: 1px solid rgba(120, 120, 200, 0.5);
-  border-radius: 8px;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-}
+function generateSetup() {
+  const playersSelect = document.getElementById("players");
+  const playersCount = parseInt(playersSelect.value, 10);
+  const noDuplicates = document.getElementById("noDuplicates").checked;
 
-section h3 {
-  margin-bottom: 0.7rem;
-  border-bottom: 1px solid rgba(120, 120, 200, 0.4);
-  padding-bottom: 0.4rem;
-}
+  const selectedExpansions = getSelectedExpansions();
 
-.controls .form-group {
-  margin-bottom: 0.8rem;
-}
-
-.controls label {
-  display: block;
-  font-size: 0.95rem;
-  margin-bottom: 0.25rem;
-}
-
-.controls input[type="checkbox"] {
-  margin-right: 0.35rem;
-}
-
-.controls select {
-  background: #111122;
-  color: #f1f1f1;
-  border: 1px solid rgba(120, 120, 200, 0.7);
-  padding: 0.35rem 0.5rem;
-  border-radius: 4px;
-}
-
-.expansion-label {
-  padding: 0.25rem 0.4rem;
-  border-radius: 4px;
-  transition: background 0.15s ease;
-}
-
-.expansion-label:hover {
-  background: rgba(60, 60, 120, 0.4);
-}
-
-.expansion-hint {
-  display: block;
-  font-size: 0.8rem;
-  color: #a0a0ff;
-  margin-left: 1.5rem;
-}
-
-button {
-  background: linear-gradient(135deg, #ff5c5c, #ff9a3c);
-  color: #ffffff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
-}
-
-button:hover {
-  filter: brightness(1.05);
-  box-shadow: 0 0 10px rgba(255, 120, 60, 0.6);
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-.result-block {
-  margin-bottom: 0.8rem;
-}
-
-.result-block h4 {
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
-  color: #ffe28a;
-}
-
-.result ul {
-  list-style: disc;
-  padding-left: 1.2rem;
-}
-
-.result li {
-  margin-bottom: 0.15rem;
-}
-
-#schools-by-player > div {
-  margin-bottom: 0.4rem;
-}
-
-#schools-by-player strong {
-  color: #a0c4ff;
-}
-
-.help ul {
-  list-style: disc;
-  padding-left: 1.2rem;
-  margin: 0.4rem 0;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.8rem;
-  color: #aaaaaa;
-  padding: 0.5rem 1rem 1rem;
-}
-
-.hidden {
-  display: none;
-}
-
-/* Responsive */
-@media (min-width: 768px) {
-  .controls {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem 2rem;
+  if (selectedExpansions.length === 0) {
+    alert("Seleziona almeno una espansione prima di generare il setup.");
+    return;
   }
 
-  .controls .form-group {
-    flex: 1 1 220px;
+  // ----- Costruzione dei pool dagli expansion scelti -----
+  let allWizards = [];
+  let allSchools = [];
+  let allRooms = [];
+
+  selectedExpansions.forEach(exp => {
+    allWizards = allWizards.concat(exp.wizards || []);
+    allSchools = allSchools.concat(exp.schools || []);
+    allRooms = allRooms.concat(exp.rooms || []);
+  });
+
+  // Controlli minimi
+  if (allWizards.length < playersCount) {
+    alert("Non ci sono abbastanza maghi nelle espansioni selezionate per il numero di giocatori.");
+    return;
   }
+
+  if (allSchools.length === 0) {
+    alert("Nessuna scuola di magia trovata nelle espansioni selezionate.");
+    return;
+  }
+
+  if (allRooms.length === 0) {
+    alert("Nessuna stanza/tessera loggia trovata nelle espansioni selezionate.");
+    return;
+  }
+
+  // ----- Selezione maghi -----
+  const selectedWizards = getRandomSubset(allWizards, playersCount);
+
+  // ----- Assegnazione scuole -----
+  // Di base 2 scuole per giocatore (puoi cambiare)
+  const schoolsPerPlayer = 2;
+
+  const schoolsByPlayer = {};
+  let poolForNoDup = shuffle(allSchools);
+
+  for (let i = 0; i < playersCount; i++) {
+    const playerName = `Giocatore ${i + 1} (${selectedWizards[i]})`;
+
+    if (noDuplicates) {
+      if (poolForNoDup.length < schoolsPerPlayer) {
+        // se il pool si esaurisce, si ricostruisce (con possibili ripetizioni)
+        poolForNoDup = poolForNoDup.concat(shuffle(allSchools));
+      }
+      const chosen = poolForNoDup.slice(0, schoolsPerPlayer);
+      poolForNoDup = poolForNoDup.slice(schoolsPerPlayer);
+      schoolsByPlayer[playerName] = chosen;
+    } else {
+      schoolsByPlayer[playerName] = getRandomSubset(allSchools, schoolsPerPlayer);
+    }
+  }
+
+  // ----- Selezione stanze -----
+  // Esempio: 6–8 stanze
+  const roomsCount = 6 + Math.floor(Math.random() * 3); // 6,7,8
+  const selectedRooms = getRandomSubset(allRooms, roomsCount);
+
+  // ----- Scenario -----
+  const selectedScenario = getRandomElement(scenarios);
+
+  // ----- Render -----
+  renderResult(selectedExpansions, selectedWizards, schoolsByPlayer, selectedRooms, selectedScenario);
 }
+
+// ==========================
+// RENDER RISULTATO
+// ==========================
+
+function renderResult(expansions, wizards, schoolsByPlayer, rooms, scenario) {
+  const resultSection = document.getElementById("result");
+  resultSection.classList.remove("hidden");
+
+  // Espansioni usate
+  const usedExpansionsEl = document.getElementById("used-expansions");
+  usedExpansionsEl.textContent = expansions.map(e => e.name).join(", ");
+
+  // Maghi
+  const wizardsList = document.getElementById("wizards-list");
+  wizardsList.innerHTML = "";
+  wizards.forEach((wiz, index) => {
+    const li = document.createElement("li");
+    li.textContent = `Giocatore ${index + 1}: ${wiz}`;
+    wizardsList.appendChild(li);
+  });
+
+  // Scuole per giocatore
+  const schoolsContainer = document.getElementById("schools-by-player");
+  schoolsContainer.innerHTML = "";
+  Object.keys(schoolsByPlayer).forEach(playerName => {
+    const div = document.createElement("div");
+    const schools = schoolsByPlayer[playerName];
+    div.innerHTML = `<strong>${playerName}</strong>: ${schools.join(", ")}`;
+    schoolsContainer.appendChild(div);
+  });
+
+  // Stanze
+  const roomsList = document.getElementById("rooms-list");
+  roomsList.innerHTML = "";
+  rooms.forEach(room => {
+    const li = document.createElement("li");
+    li.textContent = room;
+    roomsList.appendChild(li);
+  });
+
+  // Scenario
+  const scenarioEl = document.getElementById("scenario");
+  scenarioEl.textContent = scenario;
+}
+
+// ==========================
+// EVENT LISTENERS
+// ==========================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const generateBtn = document.getElementById("generate-btn");
+  const regenerateBtn = document.getElementById("regenerate-btn");
+
+  generateBtn.addEventListener("click", generateSetup);
+  regenerateBtn.addEventListener("click", generateSetup);
+});
